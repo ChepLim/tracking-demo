@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-">
+    <meta charset="UTF-8">
     <title>Tracking Event Demo - Realistic</title>
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -11,83 +11,138 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TW8Q3XGZ');</script>
 <!-- End Google Tag Manager -->
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .product { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
-        .category { margin-bottom: 20px; }
-        .btn { padding: 5px 10px; margin-right: 5px; cursor: pointer; }
-        .btn:hover { background-color: #f0f0f0; }
-    </style>
     <script>
+        // Initialize dataLayer
         window.dataLayer = window.dataLayer || [];
 
-        function gtmEvent(eventName, eventData) {
-            console.log("Pushing to dataLayer:", eventName, eventData);
-            dataLayer.push({ event: eventName, ...eventData });
-        }
+        // Push page_view event on page load
+        dataLayer.push({
+            event: 'page_view',
+            event_data: {
+                pagename: 'homepage::demo',
+                bloc_name: 'page load',
+                bloc_interaction: 'load',
+                bloc_type: 'system',
+                context: 'page_view'
+            }
+        });
 
-        function addToCart(productId, category, price, userType) {
-            gtmEvent('add_to_cart', {
-                product_id: productId,
-                category: category,
-                price: price,
-                user_type: userType
-            });
-        }
-
-        function viewDetails(productId, category, price, userType) {
-            gtmEvent('view_product_detail', {
-                product_id: productId,
-                category: category,
-                price: price,
-                user_type: userType
-            });
-        }
-
-        function selectCategory(category) {
-            gtmEvent('select_category', {
-                category: category
+        // Tracking function
+        function trackEvent(eventName, eventData) {
+            console.log("Tracking:", eventName, eventData);
+            dataLayer.push({
+                event: eventName,
+                event_data: eventData
             });
         }
     </script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .product { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+        .category { margin-bottom: 20px; }
+        button, a { margin-top: 10px; display: inline-block; }
+    </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TW8Q3XGZ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-    <h1>🛍️ Product Catalog</h1>
+    <h1>Tracking Event Demo - Realistic</h1>
 
     <div class="category">
-        <strong>Filter by Category:</strong>
-        <button class="btn" onclick="selectCategory('electronics')">Electronics</button>
-        <button class="btn" onclick="selectCategory('fashion')">Fashion</button>
-        <button class="btn" onclick="selectCategory('books')">Books</button>
+        <label for="categorySelect">Select Category:</label>
+        <select id="categorySelect" onchange="trackEvent('select_category', {
+            pagename: 'homepage::demo',
+            bloc_name: 'category dropdown',
+            bloc_interaction: this.value,
+            bloc_type: 'select',
+            context: 'select_category'
+        })">
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="books">Books</option>
+        </select>
     </div>
 
     <div class="product">
-        <h3>Wireless Headphones</h3>
-        <p>Category: Electronics</p>
-        <p>Price: $99</p>
-        <button class="btn" onclick="addToCart('P001', 'electronics', 99, 'guest')">Add to Cart</button>
-        <button class="btn" onclick="viewDetails('P001', 'electronics', 99, 'guest')">View Details</button>
-    </div>
-
-    <div class="product">
-        <h3>Men's Jacket</h3>
+        <h2>Men's Jacket</h2>
         <p>Category: Fashion</p>
-        <p>Price: $59</p>
-        <button class="btn" onclick="addToCart('P002', 'fashion', 59, 'guest')">Add to Cart</button>
-        <button class="btn" onclick="viewDetails('P002', 'fashion', 59, 'guest')">View Details</button>
+        <button onclick="trackEvent('add_to_cart', {
+            pagename: 'homepage::demo',
+            bloc_name: 'Men's Jacket',
+            bloc_interaction: 'add_to_cart',
+            bloc_type: 'button',
+            context: 'add_to_cart'
+        })">Add to Cart</button>
+        <a href="#" onclick="trackEvent('view_product_detail', {
+            pagename: 'homepage::demo',
+            bloc_name: 'Men's Jacket',
+            bloc_interaction: 'view_detail',
+            bloc_type: 'link',
+            context: 'view_product_detail'
+        })">View Details</a>
     </div>
 
     <div class="product">
-        <h3>Data Science Book</h3>
-        <p>Category: Books</p>
-        <p>Price: $39</p>
-        <button class="btn" onclick="addToCart('P003', 'books', 39, 'guest')">Add to Cart</button>
-        <button class="btn" onclick="viewDetails('P003', 'books', 39, 'guest')">View Details</button>
+        <h2>Wireless Headphones</h2>
+        <p>Category: Electronics</p>
+        <button onclick="trackEvent('add_to_cart', {
+            pagename: 'homepage::demo',
+            bloc_name: 'Wireless Headphones',
+            bloc_interaction: 'add_to_cart',
+            bloc_type: 'button',
+            context: 'add_to_cart'
+        })">Add to Cart</button>
+        <a href="#" onclick="trackEvent('view_product_detail', {
+            pagename: 'homepage::demo',
+            bloc_name: 'Wireless Headphones',
+            bloc_interaction: 'view_detail',
+            bloc_type: 'link',
+            context: 'view_product_detail'
+        })">View Details</a>
     </div>
+
+    <div class="product">
+        <h2>Book: Learn Python</h2>
+        <p>Category: Books</p>
+        <button onclick="trackEvent('add_to_cart', {
+            pagename: 'homepage::demo',
+            bloc_name: 'Learn Python Book',
+            bloc_interaction: 'add_to_cart',
+            bloc_type: 'button',
+            context: 'add_to_cart'
+        })">Add to Cart</button>
+        <a href="#" onclick="trackEvent('view_product_detail', {
+            pagename: 'homepage::demo',
+            bloc_name: 'Learn Python Book',
+            bloc_interaction: 'view_detail',
+            bloc_type: 'link',
+            context: 'view_product_detail'
+        })">View Details</a>
+    </div>
+
+    <form onsubmit="trackEvent('submit_form', {
+        pagename: 'homepage::demo',
+        bloc_name: 'contact form',
+        bloc_interaction: 'submit',
+        bloc_type: 'form',
+        context: 'submit_form'
+    }); return false;">
+        <h3>Contact Us</h3>
+        <input type="text" placeholder="Your Name" required><br><br>
+        <input type="email" placeholder="Your Email" required><br><br>
+        <button type="submit">Submit Form</button>
+    </form>
+
+    <br>
+    <a href="#" onclick="trackEvent('click_link', {
+        pagename: 'homepage::demo',
+        bloc_name: 'external link',
+        bloc_interaction: 'click',
+        bloc_type: 'link',
+        context: 'click_link'
+    })">Click this link</a>
 
 </body>
 </html>
