@@ -1,148 +1,291 @@
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="vi">
 <head>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TW8Q3XGZ');</script>
-<!-- End Google Tag Manager -->
-    <meta charset="UTF-8">
-    <title>Tracking Event Demo - Realistic</title>
-    <script>
-        // Initialize dataLayer
-        window.dataLayer = window.dataLayer || [];
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo Tracking – GTM + GA4</title>
+  <meta name="description" content="Trang demo tracking sự kiện với Google Tag Manager và GA4" />
 
-        // Push page_view event on page load
-        dataLayer.push({
-            event: 'page_view',
-            event_data: {
-                pagename: 'homepage::demo',
-                bloc_name: 'page load',
-                bloc_interaction: 'load',
-                bloc_type: 'system',
-                context: 'page_view'
-            }
-        });
+  <!-- ✅ GTM (Head) – Thay GTM-XXXXXXX bằng Container ID của bạn -->
+  <script>
+    // Khởi tạo dataLayer sớm nhất có thể
+    window.dataLayer = window.dataLayer || [];
+    // Push page_view khi trang load (có kèm thông tin page)
+    window.dataLayer.push({
+      'event': 'page_view',
+      'page_title': document.title,
+      'page_location': window.location.href,
+      'page_path': window.location.pathname
+    });
+  </script>
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TW8Q3XGZ'); // <-- Thay bằng ID GTM
+  </script>
+  <!-- End GTM -->
 
-        // Tracking function
-        function trackEvent(eventName, eventData) {
-            console.log("Tracking:", eventName, eventData);
-            dataLayer.push({
-                event: eventName,
-                event_data: eventData
-            });
-        }
-    </script>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        .product { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
-        .category { margin-bottom: 20px; }
-        button, a { margin-top: 10px; display: inline-block; }
-    </style>
+  <style>
+    :root {
+      --bg: #0f172a; /* slate-900 */
+      --card: #111827; /* gray-900 */
+      --text: #e5e7eb; /* gray-200 */
+      --muted: #9ca3af; /* gray-400 */
+      --primary: #22c55e; /* green-500 */
+      --accent: #3b82f6; /* blue-500 */
+      --danger: #ef4444; /* red-500 */
+    }
+    html, body { background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu; }
+    .container { max-width: 960px; margin: 0 auto; padding: 24px; }
+    header, footer { margin: 16px 0; }
+    .card { background: var(--card); border: 1px solid #1f2937; padding: 16px; border-radius: 12px; margin-bottom: 16px; }
+    h1,h2 { margin: 0 0 8px 0; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; border: 1px solid #374151; color: var(--text); background: #0b1220; cursor: pointer; }
+    .btn:hover { background: #0e1628; }
+    .btn-primary { border-color: var(--primary); color: #d1fae5; }
+    .btn-accent { border-color: var(--accent); color: #dbeafe; }
+    .btn-danger { border-color: var(--danger); color: #fee2e2; }
+    input, select { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid #374151; background: #0b1220; color: var(--text); }
+    label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .badge { display:inline-block; padding: 4px 8px; font-size: 12px; border-radius: 999px; background:#0b1220; border: 1px solid #374151; color: var(--muted); }
+    code { background: #0b1220; border: 1px solid #374151; border-radius: 6px; padding: 2px 6px; }
+    .muted { color: var(--muted); font-size: 13px; }
+  </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
+
+  <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TW8Q3XGZ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-    <h1>Tracking Event Demo - Realistic</h1>
 
-    <div class="category">
-        <label for="categorySelect">Select Category:</label>
-        <select id="categorySelect" onchange="trackEvent('select_category', {
-            pagename: 'homepage::demo',
-            bloc_name: 'category dropdown',
-            bloc_interaction: this.value,
-            bloc_type: 'select',
-            context: 'select_category'
-        })">
-            <option value="electronics">Electronics</option>
-            <option value="fashion">Fashion</option>
-            <option value="books">Books</option>
-        </select>
-    </div>
+  <div class="container">
+    <header>
+      <h1>Demo Tracking – Google Tag Manager + GA4</h1>
+      <p class="muted">Trang này giúp bạn test <code>page_view</code>, <code>cta_click</code>, <code>form_submit</code>, <code>add_to_cart</code>, và điều hướng kiểu SPA.</p>
+    </header>
 
-    <div class="product">
-        <h2>Men's Jacket</h2>
-        <p>Category: Fashion</p>
-        <button onclick="trackEvent('add_to_cart', {
-            pagename: 'homepage::demo',
-            bloc_name: 'Men's Jacket',
-            bloc_interaction: 'add_to_cart',
-            bloc_type: 'button',
-            context: 'add_to_cart'
-        })">Add to Cart</button>
-        <a href="#" onclick="trackEvent('view_product_detail', {
-            pagename: 'homepage::demo',
-            bloc_name: 'Men's Jacket',
-            bloc_interaction: 'view_detail',
-            bloc_type: 'link',
-            context: 'view_product_detail'
-        })">View Details</a>
-    </div>
+    <!-- Navigation giả lập SPA -->
+    <nav class="card">
+      <h2>Điều hướng (SPA giả lập)</h2>
+      <div class="grid-3">
+        <button class="btn btn-accent" data-route="/home" data-title="Trang chủ">Home</button>
+        <button class="btn btn-accent" data-route="/about" data-title="Giới thiệu">About</button>
+        <button class="btn btn-accent" data-route="/contact" data-title="Liên hệ">Contact</button>
+      </div>
+      <p class="muted">Click các nút để đổi nội dung và bắn <code>page_view</code> với <code>page_path</code> mới.</p>
+    </nav>
 
-    <div class="product">
-        <h2>Wireless Headphones</h2>
-        <p>Category: Electronics</p>
-        <button onclick="trackEvent('add_to_cart', {
-            pagename: 'homepage::demo',
-            bloc_name: 'Wireless Headphones',
-            bloc_interaction: 'add_to_cart',
-            bloc_type: 'button',
-            context: 'add_to_cart'
-        })">Add to Cart</button>
-        <a href="#" onclick="trackEvent('view_product_detail', {
-            pagename: 'homepage::demo',
-            bloc_name: 'Wireless Headphones',
-            bloc_interaction: 'view_detail',
-            bloc_type: 'link',
-            context: 'view_product_detail'
-        })">View Details</a>
-    </div>
+    <!-- CTA buttons -->
+    <section class="card">
+      <h2>CTA Buttons</h2>
+      <div class="row">
+        <button class="btn btn-primary" id="btn-buy" data-cta="Mua ngay">🛒 Mua ngay</button>
+        <button class="btn" id="btn-subscribe" data-cta="Đăng ký nhận tin">🔔 Đăng ký nhận tin</button>
+      </div>
+      <p class="muted">Mỗi lần click sẽ push <code>event: 'cta_click'</code> cùng <code>button_text</code>, <code>page_location</code>.</p>
+    </section>
 
-    <div class="product">
-        <h2>Book: Learn Python</h2>
-        <p>Category: Books</p>
-        <button onclick="trackEvent('add_to_cart', {
-            pagename: 'homepage::demo',
-            bloc_name: 'Learn Python Book',
-            bloc_interaction: 'add_to_cart',
-            bloc_type: 'button',
-            context: 'add_to_cart'
-        })">Add to Cart</button>
-        <a href="#" onclick="trackEvent('view_product_detail', {
-            pagename: 'homepage::demo',
-            bloc_name: 'Learn Python Book',
-            bloc_interaction: 'view_detail',
-            bloc_type: 'link',
-            context: 'view_product_detail'
-        })">View Details</a>
-    </div>
+    <!-- Form submit -->
+    <section class="card">
+      <h2>Form đăng ký</h2>
+      <form id="signup-form">
+        <div class="row">
+          <div>
+            <label for="name">Họ tên</label>
+            <input id="name" name="name" placeholder="Nguyễn Văn A" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="plan">Gói</label>
+            <select id="plan" name="plan">
+              <option value="free">Free</option>
+              <option value="pro">Pro</option>
+              <option value="enterprise">Enterprise</option>
+            </select>
+          </div>
+          <div>
+            <label for="utm">UTM (giả lập)</label>
+            <input id="utm" name="utm" placeholder="utm_source=demo&utm_campaign=winter" />
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <button class="btn btn-primary" type="submit">Gửi đăng ký</button>
+          <span class="badge">Sẽ push <code>event: 'form_submit'</code></span>
+        </div>
+      </form>
+    </section>
 
-    <form onsubmit="trackEvent('submit_form', {
-        pagename: 'homepage::demo',
-        bloc_name: 'contact form',
-        bloc_interaction: 'submit',
-        bloc_type: 'form',
-        context: 'submit_form'
-    }); return false;">
-        <h3>Contact Us</h3>
-        <input type="text" placeholder="Your Name" required><br><br>
-        <input type="email" placeholder="Your Email" required><br><br>
-        <button type="submit">Submit Form</button>
-    </form>
+    <!-- Add to cart demo -->
+    <section class="card">
+      <h2>Giỏ hàng (demo add_to_cart)</h2>
+      <div class="row">
+        <div>
+          <p><strong>Sản phẩm:</strong> Áo thun Demo</p>
+          <p class="muted">id: <code>sku_tee_001</code> • category: <code>apparel</code> • price: <code>199000</code></p>
+        </div>
+        <div style="text-align:right;">
+          <button class="btn btn-primary" id="btn-add-cart">➕ Thêm vào giỏ</button>
+        </div>
+      </div>
+      <p class="muted">Push <code>event: 'add_to_cart'</code> theo chuẩn GA4 eCommerce parameters.</p>
+    </section>
 
-    <br>
-    <a href="#" onclick="trackEvent('click_link', {
-        pagename: 'homepage::demo',
-        bloc_name: 'external link',
-        bloc_interaction: 'click',
-        bloc_type: 'link',
-        context: 'click_link'
-    })">Click this link</a>
+    <!-- Consent demo -->
+    <section class="card">
+      <h2>Quyền riêng tư & Consent</h2>
+      <div class="row">
+        <div>
+          <p class="muted">Toggle trạng thái consent (giả lập) để kiểm tra behavior trong GTM.</p>
+        </div>
+        <div style="text-align:right;">
+          <button class="btn" id="btn-consent-grant">✅ Grant consent</button>
+          <button class="btn btn-danger" id="btn-consent-deny">⛔ Deny consent</button>
+        </div>
+      </div>
+      <p class="muted">Sử dụng <code>event: 'consent_update'</code> với <code>analytics_storage</code>, <code>ad_storage</code>.</p>
+    </section>
 
+    <!-- Debug helper -->
+    <section class="card">
+      <h2>Debug</h2>
+      <p class="muted">
+        Mở <strong>GTM Preview (Tag Assistant)</strong> để xem event vào <code>dataLayer</code>.<br />
+        <em>Dev tip:</em> bật log console để thấy payload mỗi lần push.
+      </p>
+      <div>
+        <label><input type="checkbox" id="debug-toggle" /> Bật console log payload</label>
+      </div>
+    </section>
+
+    <footer>
+      <p class="muted">© Demo Tracking – GTM + GA4 • Được tạo cho training QC.</p>
+    </footer>
+  </div>
+
+  <!-- ==================== Scripts ==================== -->
+  <script>
+    const debugToggle = document.getElementById('debug-toggle');
+
+    function dlPush(payload) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(payload);
+      if (debugToggle && debugToggle.checked) {
+        console.log('[dataLayer.push]', payload);
+      }
+    }
+
+    // SPA nav giả lập: đổi title + path + bắn page_view
+    document.querySelectorAll('[data-route]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const newPath = btn.getAttribute('data-route');
+        const newTitle = btn.getAttribute('data-title');
+        history.pushState({ page: newTitle }, newTitle, newPath);
+        document.title = 'Demo Tracking – ' + newTitle;
+
+        dlPush({
+          event: 'page_view',
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname
+        });
+      });
+    });
+
+    // CTA clicks
+    document.getElementById('btn-buy').addEventListener('click', (e) => {
+      const buttonText = e.currentTarget.getAttribute('data-cta');
+      dlPush({
+        event: 'cta_click',
+        button_text: buttonText,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+    });
+    document.getElementById('btn-subscribe').addEventListener('click', (e) => {
+      const buttonText = e.currentTarget.getAttribute('data-cta');
+      dlPush({
+        event: 'cta_click',
+        button_text: buttonText,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+    });
+
+    // Form submit
+    document.getElementById('signup-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const plan = document.getElementById('plan').value;
+      const utm = document.getElementById('utm').value.trim();
+
+      dlPush({
+        event: 'form_submit',
+        form_type: 'signup',
+        form_fields: { name, email, plan },
+        utm_raw: utm || null,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+
+      alert('Đã gửi đăng ký (demo). Sự kiện đã push vào dataLayer.');
+      e.target.reset();
+    });
+
+    // Add to cart (GA4 eCommerce khuyến nghị)
+    document.getElementById('btn-add-cart').addEventListener('click', () => {
+      dlPush({
+        event: 'add_to_cart',
+        currency: 'VND',
+        value: 199000,
+        items: [{
+          item_id: 'sku_tee_001',
+          item_name: 'Áo thun Demo',
+          item_category: 'apparel',
+          price: 199000,
+          quantity: 1
+        }]
+      });
+    });
+
+    // Consent update (giả lập)
+    document.getElementById('btn-consent-grant').addEventListener('click', () => {
+      dlPush({
+        event: 'consent_update',
+        analytics_storage: 'granted',
+        ad_storage: 'granted'
+      });
+      alert('Đã grant consent (demo).');
+    });
+    document.getElementById('btn-consent-deny').addEventListener('click', () => {
+      dlPush({
+        event: 'consent_update',
+        analytics_storage: 'denied',
+        ad_storage: 'denied'
+      });
+      alert('Đã deny consent (demo).');
+    });
+
+    // Handle back/forward (SPA)
+    window.addEventListener('popstate', () => {
+      dlPush({
+        event: 'page_view',
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+      });
+    });
+  </script>
 </body>
 </html>
