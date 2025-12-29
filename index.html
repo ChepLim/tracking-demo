@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo GTM Tracking - GTM-TW8Q3XGZ</title>
+    <title>Demo GTM Tracking Full Code</title>
 
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -11,71 +11,23 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TW8Q3XGZ');</script>
     <style>
-        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
-        section { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 8px; background-color: #f9f9f9; }
-        h2 { margin-top: 0; color: #333; }
-        button, input[type="submit"] { padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; }
-        button:hover { background-color: #0056b3; }
-        .btn-purchase { background-color: #28a745; }
-        input[type="email"] { padding: 10px; width: 60%; margin-right: 10px; }
-        .note { font-size: 0.9em; color: #666; font-style: italic; margin-top: 10px; }
+        body { font-family: -apple-system, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #f0f2f5; }
+        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+        button { background: #1a73e8; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        button:hover { background: #1557b0; }
     </style>
 </head>
 <body>
-
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TW8Q3XGZ"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <h1>Trang Demo Tracking GTM</h1>
-    <p>Trang này dùng để kiểm tra debug mode của Google Tag Manager container ID: <strong>GTM-TW8Q3XGZ</strong></p>
-
-    <section>
-        <h2>1. Test Click (Nút bấm)</h2>
-        <p>Thử nghiệm tracking hành vi bấm nút.</p>
-        
-        <button id="btn-contact-us">Liên hệ (ID: btn-contact-us)</button>
-        
-        <br><br>
-        
-        <button class="btn-purchase">Mua ngay (Class: btn-purchase)</button>
-        
-        <p class="note">Dùng để test Trigger loại "Click - All Elements".</p>
-    </section>
-
-    <section>
-        <h2>2. Test Link (Liên kết ngoài)</h2>
-        <p>Bấm vào link này để test tracking chuyển trang.</p>
-        <a href="https://www.google.com" target="_blank">Đến trang Google.com</a>
-        <p class="note">Dùng để test Trigger loại "Click - Just Links".</p>
-    </section>
-
-    <section>
-        <h2>3. Test Form Submit</h2>
-        <p>Điền email giả và bấm đăng ký.</p>
-        <form id="newsletter-form" onsubmit="alert('Form đã gửi! Kiểm tra GTM Debug.'); return false;">
-            <input type="email" name="email" placeholder="Nhập email của bạn..." required>
-            <input type="submit" value="Đăng ký nhận tin">
-        </form>
-        <p class="note">Dùng để test Trigger loại "Form Submission" (Form ID: newsletter-form).</p>
-    </section>
-
-    <section>
-        <h2>4. Test Data Layer (Nâng cao)</h2>
-        <p>Nút này sẽ đẩy một sự kiện tùy chỉnh (Custom Event) vào DataLayer.</p>
-        <button onclick="pushCustomEvent()">Gửi Event 'generate_lead'</button>
-
-        <script>
-            function pushCustomEvent() {
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
-                    'event': 'generate_lead',
-                    'lead_value': 100,
-                    'lead_currency': 'VND'
-                });
-                alert('Đã push event "generate_lead" vào dataLayer!');
-            }
-        </script>
-        <p class="note">Dùng để test Trigger loại "Custom Event" với Event Name là "generate_lead".</p>
-    </section>
+    <div class="card">
+        <h1>GTM-TW8Q3XGZ Debug</h1>
+        <p>Đã thêm đầy đủ code Head và Body.</p>
+        <button id="test-button">Bấm để Test Event</button>
+        <p style="font-size: 12px; color: #666; margin-top: 20px;">
+            Hãy đảm bảo bạn đã nhấn <b>Submit/Publish</b> trong GTM.
+        </p>
+    </div>
 
 </body>
 </html>
