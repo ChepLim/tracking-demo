@@ -7,26 +7,13 @@
   <title>Demo Tracking – GTM + GA4</title>
   <meta name="description" content="Trang demo tracking sự kiện với Google Tag Manager và GA4" />
 
-  <!-- ✅ GTM (Head) – Thay GTM-XXXXXXX bằng Container ID của bạn -->
-  <script>
-    // Khởi tạo dataLayer sớm nhất có thể
-    window.dataLayer = window.dataLayer || [];
-    // Push page_view khi trang load (có kèm thông tin page)
-    window.dataLayer.push({
-      'event': 'page_view',
-      'page_title': document.title,
-      'page_location': window.location.href,
-      'page_path': window.location.pathname
-    });
-  </script>
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TW8Q3XGZ'); // <-- Thay bằng ID GTM
-  </script>
-  <!-- End GTM -->
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TW8Q3XGZ');</script>
+<!-- End Google Tag Manager -->
 
   <style>
     :root {
